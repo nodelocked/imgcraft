@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Database
+*.db
+imgcraft.db
+
+# Build & Dist
+build/
+dist/
+*.spec
+
+# PDF & Bundles
+*.pdf
+_bundles/
+
+# OS
+.DS_Store
+Thumbs.db
