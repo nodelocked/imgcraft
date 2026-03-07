@@ -194,13 +194,21 @@ class ImgCraftApp(QMainWindow):
         self.archive_btn.clicked.connect(self.archive_workflow)
         prop_layout.addWidget(self.archive_btn)
         
-        prop_layout.addWidget(QLabel("HOTKEYS: F1/← (Prev) | F2/→ (Next) | DEL (Delete File)", objectName="shortcut_hint"))
+        prop_layout.addWidget(QLabel("HOTKEYS: F1/← (Prev) | F2/→ (Next) | DEL (Delete) | Ctrl+DEL (Force Delete)", objectName="shortcut_hint"))
 
         main_layout.addWidget(self.right_panel)
 
     # --- Navigation & Hotkeys ---
+    def mousePressEvent(self, event):
+        # Clear focus from any widget if clicking on the background
+        focused_widget = QApplication.focusWidget()
+        if focused_widget:
+            focused_widget.clearFocus()
+        super().mousePressEvent(event)
+
     def keyPressEvent(self, event: QKeyEvent):
         key = event.key()
+        modifiers = event.modifiers()
         
         # F1 and F2 are SAFE to be global always (no text editing conflict)
         if key == Qt.Key_F1:
@@ -212,6 +220,12 @@ class ImgCraftApp(QMainWindow):
             event.accept()
             return
             
+        # Global Force Delete (Ctrl+Delete)
+        if key == Qt.Key_Delete and (modifiers & Qt.ControlModifier):
+            self.delete_permanently()
+            event.accept()
+            return
+
         # Arrows and Delete are only global if NOT in text focus
         # This prevents breaking text editing (cursor movement/backspace)
         if not (self.inspiration_input.hasFocus() or self.tag_entry.hasFocus() or self.jump_input.hasFocus()):
