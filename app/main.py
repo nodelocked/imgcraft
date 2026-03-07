@@ -178,6 +178,12 @@ class ImgCraftApp(QMainWindow):
         prop_layout.addWidget(self.tags_container)
 
         prop_layout.addSpacing(20)
+        self.delete_btn = QPushButton("DELETE PHOTO (DEL)")
+        self.delete_btn.setObjectName("delete_btn")
+        self.delete_btn.clicked.connect(self.delete_permanently)
+        prop_layout.addWidget(self.delete_btn)
+
+        prop_layout.addSpacing(20)
         prop_layout.addWidget(QLabel("FILTERS", objectName="panel_label"))
         self.tag_cloud_area = QScrollArea()
         self.tag_cloud_area.setWidgetResizable(True)

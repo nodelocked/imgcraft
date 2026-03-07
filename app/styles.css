@@ -144,6 +144,21 @@ QLineEdit {
     color: white;
 }
 
+#delete_btn {
+    background: #111111;
+    border: 1px solid #ff3b30;
+    color: #ff3b30;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 11px;
+}
+
+#delete_btn:hover {
+    background: #ff3b30;
+    color: white;
+}
+
 #tag_chip {
     background: #111111;
     border: 1px solid #222222;
